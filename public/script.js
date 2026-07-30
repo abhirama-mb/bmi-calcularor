@@ -7,18 +7,19 @@ form.addEventListener('submit', (event) => {
   const weightInput = document.getElementById('weight');
   const heightInput = document.getElementById('height');
   const weight = parseFloat(weightInput.value);
-  const height = parseFloat(heightInput.value);
+  const heightCm = parseFloat(heightInput.value);
 
   if (!weightInput.value || !heightInput.value) {
     showMessage('Please fill in both weight and height.');
     return;
   }
 
-  if (weight <= 0 || height <= 0) {
+  if (weight <= 0 || heightCm <= 0) {
     showMessage('Weight and height must be greater than zero.');
     return;
   }
 
+  const height = heightCm / 100;
   const bmi = weight / (height * height);
   const roundedBmi = bmi.toFixed(2);
   let category = '';
