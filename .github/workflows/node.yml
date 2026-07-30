@@ -9,38 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        run: echo "📥 Step 1: Checking out the repository..."
-      - uses: actions/checkout@v4
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        run: echo "🟢 Step 2: Setting up Node.js 18..."
-      - uses: actions/setup-node@v4
+      - name: 🟢 Set up Node.js 18
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: |
-          echo "📦 Step 3: Installing npm dependencies..."
+          echo "Installing npm dependencies..."
           npm install
-          echo "✅ Dependencies installed successfully."
+          echo "Dependencies installed successfully."
 
-      - name: Start Express server and verify
+      - name: 🚀 Start Express server and verify
         run: |
-          echo "🚀 Step 4: Starting Express server..."
+          echo "Starting Express server..."
           node server.js &
           server_pid=$!
 
-          echo "⏳ Waiting for server to start..."
+          echo "Waiting for server to start..."
           sleep 5
 
-          echo "🌐 Sending request to http://localhost:3000 ..."
+          echo "Sending request to http://localhost:3000 ..."
           curl --fail http://localhost:3000
 
-          echo "✅ Server responded successfully."
+          echo "Server responded successfully."
 
-          echo "🛑 Stopping server..."
+          echo "Stopping server..."
           kill $server_pid
 
-          echo "🎉 CI pipeline completed successfully!"
+          echo "CI pipeline completed successfully!"
