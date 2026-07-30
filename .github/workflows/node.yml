@@ -10,21 +10,37 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        run: echo "📥 Step 1: Checking out the repository..."
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        run: echo "🟢 Step 2: Setting up Node.js 18..."
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "📦 Step 3: Installing npm dependencies..."
+          npm install
+          echo "✅ Dependencies installed successfully."
 
       - name: Start Express server and verify
         run: |
+          echo "🚀 Step 4: Starting Express server..."
           node server.js &
           server_pid=$!
+
+          echo "⏳ Waiting for server to start..."
           sleep 5
+
+          echo "🌐 Sending request to http://localhost:3000 ..."
           curl --fail http://localhost:3000
+
+          echo "✅ Server responded successfully."
+
+          echo "🛑 Stopping server..."
           kill $server_pid
+
+          echo "🎉 CI pipeline completed successfully!"
