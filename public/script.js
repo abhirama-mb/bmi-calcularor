@@ -4,11 +4,18 @@ const resultElement = document.getElementById('result');
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const weight = parseFloat(document.getElementById('weight').value);
-  const height = parseFloat(document.getElementById('height').value);
+  const weightInput = document.getElementById('weight');
+  const heightInput = document.getElementById('height');
+  const weight = parseFloat(weightInput.value);
+  const height = parseFloat(heightInput.value);
 
-  if (!weight || !height || height <= 0) {
-    resultElement.innerHTML = '<p>Please enter valid values for weight and height.</p>';
+  if (!weightInput.value || !heightInput.value) {
+    showMessage('Please fill in both weight and height.');
+    return;
+  }
+
+  if (weight <= 0 || height <= 0) {
+    showMessage('Weight and height must be greater than zero.');
     return;
   }
 
@@ -30,4 +37,10 @@ form.addEventListener('submit', (event) => {
     <p><strong>BMI:</strong> ${roundedBmi}</p>
     <p><strong>Category:</strong> ${category}</p>
   `;
+  resultElement.classList.remove('error');
 });
+
+function showMessage(message) {
+  resultElement.innerHTML = `<p>${message}</p>`;
+  resultElement.classList.add('error');
+}

@@ -91,10 +91,17 @@ button:hover {
   min-height: 90px;
 }
 
-.result-text {
+.result-text,
+.result p {
   margin: 0;
   font-size: 1rem;
   color: #475569;
+}
+
+.result.error {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
 }
 
 @media (max-width: 420px) {
